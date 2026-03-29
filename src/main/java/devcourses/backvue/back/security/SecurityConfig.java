@@ -147,10 +147,12 @@ public class SecurityConfig {
                         // Permit all requests (no authentication required) to the login, register, and
                         // health endpoints
                         .requestMatchers("/api/signin", "/api/signup", "/api/health").permitAll()
+                        .requestMatchers("/actuator", "/actuator/", "/actuator/health", "/actuator/info").permitAll()
 
                         // Restrict access to any endpoint starting with "/api/users/" to users who have
                         // the "ADMIN" role
                         .requestMatchers("/api/users/**").hasRole("ADMIN")
+                        .requestMatchers("/actuator/**").hasRole("ADMIN")
 
                         // Allow all preflight (OPTIONS) requests. Browsers send OPTIONS requests first
                         // to check CORS permissions.
